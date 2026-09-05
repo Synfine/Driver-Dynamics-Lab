@@ -4,8 +4,9 @@ from pathlib import Path
 # =========================
 # PROJECT ROOT SETUP
 # =========================
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.append(str(ROOT))
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+IMPORTER_ROOT = Path(__file__).resolve().parents[1]
+sys.path.append(str(PROJECT_ROOT))
 
 # =========================
 # IMPORTS
@@ -132,18 +133,12 @@ def run_analysis(car):
 # =========================
 # EXPORT
 # =========================
-def export_car(car, root):
+def export_car(car, project_root):
     try:
         manufacturer_slug = slugify(car.manufacturer or "unknown")
         model_slug = slugify(car.model or "unknown")
 
-        output = (
-            root.parent
-            / "database"
-            / "cars"
-            / manufacturer_slug
-            / f"{model_slug}.json"
-        )
+        output = project_root / "database" / "cars" / manufacturer_slug / f"{model_slug}.json"
 
         output.parent.mkdir(parents=True, exist_ok=True)
         JsonExporter.export(car, output)
@@ -209,7 +204,7 @@ def visualize_results(accel_data, times):
 # =========================
 # CORE PIPELINE
 # =========================
-def process_all_files(file_paths, root):
+def process_all_files(file_paths, project_root):
 
     car = parse_files(file_paths)
 
@@ -220,7 +215,7 @@ def process_all_files(file_paths, root):
         return
 
     run_analysis(car)
-    export_car(car, root)
+    export_car(car, project_root)
 
     accel_data, times = run_simulation(car)
 
@@ -234,8 +229,8 @@ def process_all_files(file_paths, root):
 # ENTRYPOINT
 # =========================
 def main():
-    root = ROOT
-    data_dir = root / "sample_data"
+    project_root = PROJECT_ROOT
+    data_dir = IMPORTER_ROOT / "sample_data"
 
     ini_files = list(data_dir.glob("*.ini"))
 
@@ -245,7 +240,7 @@ def main():
         print("❌ No .ini files found")
         return
 
-    process_all_files(ini_files, root)
+    process_all_files(ini_files, project_root)
 
 
 if __name__ == "__main__":
