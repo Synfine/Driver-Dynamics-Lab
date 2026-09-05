@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Driver Dynamics Lab Car",
+  "type": "object",
+
+  "properties": {
+
+    "id": {
+      "type": "string"
+    },
+
+    "manufacturer": {
+      "type": "string"
+    },
+
+    "model": {
+      "type": "string"
+    },
+
+    "generation": {
+      "type": "string"
+    },
+
+    "year": {
+      "type": "integer"
+    },
+
+    "simulators": {
+      "type": "object"
+    },
+
+    "real": {
+      "type": "object"
+    }
+
+  },
+
+  "required": [
+    "id",
+    "manufacturer",
+    "model"
+  ]
+}

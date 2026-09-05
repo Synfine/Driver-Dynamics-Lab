@@ -1,0 +1,20 @@
+[project]
+name = "driver-dynamics-lab"
+version = "0.1.0"
+description = "Driver Dynamics Lab - Motorsport, Vehicle Dynamics and Sim Racing Platform"
+requires-python = ">=3.13"
+
+authors = [
+    { name = "Synfine" }
+]
+
+dependencies = []
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["importer/tests"]

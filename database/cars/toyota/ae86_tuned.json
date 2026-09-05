@@ -1,0 +1,51 @@
+{
+    "manufacturer": "TOYOTA",
+    "model": "AE86 Tuned",
+    "mass": 975.0,
+    "steer_lock": 450.0,
+    "max_fuel": 50.0,
+    "drivetrain": "RWD",
+    "gears": 5,
+    "max_torque": null,
+    "max_power": null,
+    "limiter": 8000,
+    "power_curve": "power.lut",
+    "power_data": [
+        [
+            1000,
+            50.0
+        ],
+        [
+            2000,
+            80.0
+        ],
+        [
+            3000,
+            120.0
+        ],
+        [
+            4000,
+            150.0
+        ],
+        [
+            5000,
+            160.0
+        ],
+        [
+            6000,
+            155.0
+        ],
+        [
+            7000,
+            140.0
+        ]
+    ],
+    "gear_ratios": [
+        3.587,
+        2.022,
+        1.384,
+        1.0,
+        0.861
+    ],
+    "final_drive": 4.778
+}
