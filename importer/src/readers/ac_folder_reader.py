@@ -65,7 +65,7 @@ def parse_ini_sections(text: str) -> dict[str, dict[str, str]]:
     )
     config.optionxform = str.upper
     try:
-        config.read_string(text)
+        config.read_string(text.removeprefix("\ufeff"))
     except configparser.Error as exc:
         raise CarFolderReadError("INI format is invalid or has duplicate sections/keys.") from exc
     return {
