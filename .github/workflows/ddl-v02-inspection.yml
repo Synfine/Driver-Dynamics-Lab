@@ -1,0 +1,34 @@
+name: DDL V0.2 read-only car inspection
+
+on:
+  push:
+    branches:
+      - feature/ddl-v02-safe-car-folder-inspection
+  pull_request:
+    paths:
+      - "importer/src/readers/ac_folder_reader.py"
+      - "importer/src/readers/car_folder_inspector.py"
+      - "importer/src/inspect_car.py"
+      - "importer/tests/test_ac_folder_inspection.py"
+      - ".github/workflows/ddl-v02-inspection.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  inspection-tests:
+    name: Python 3.13 / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Standard-library regression suite
+        run: python -m unittest discover -s importer/tests -p "test_*.py" -v
+      - name: AE86 sample CLI smoke
+        run: python -m importer.src.inspect_car --car-dir importer/sample_data --json
